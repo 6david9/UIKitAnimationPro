@@ -24,14 +24,14 @@
     {
         case AnimationDisplacement:
         {
-            UIDisplaceAnimation * displaceMent  = (UIDisplaceAnimation*)animation;
+            UIMoveAnimation * displaceMent  = (UIMoveAnimation*)animation;
             center.x = displaceMent.point.x;
             center.y = displaceMent.point.y;
             break;
         }
         case AnimationDisplacementBy:
         {
-            UIDisplaceAnimation * displaceMent  = (UIDisplaceAnimation*)animation;
+            UIMoveAnimation * displaceMent  = (UIMoveAnimation*)animation;
             center.x+=displaceMent.point.x;
             center.y+=displaceMent.point.y;
             break;

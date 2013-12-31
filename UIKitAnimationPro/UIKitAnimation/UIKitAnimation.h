@@ -78,13 +78,13 @@ typedef enum
 /**
  *	UIDisplaceAnimation 位置移动
  */
-@interface UIDisplaceAnimation : UIKitAnimation
+@interface UIMoveAnimation : UIKitAnimation
 
 @property (nonatomic,assign) CGPoint point;
 
-+(UIDisplaceAnimation*)actionToPoint:(CGPoint)point
++(UIMoveAnimation*)actionToPoint:(CGPoint)point
                               Duration:(CGFloat)duration;
-+(UIDisplaceAnimation*)actionByPoint:(CGPoint)point
++(UIMoveAnimation*)actionByPoint:(CGPoint)point
                             Duration:(CGFloat)duration;
 @end
 

@@ -59,22 +59,22 @@
 }
 
 @end
-@implementation UIDisplaceAnimation
+@implementation UIMoveAnimation
 
-+(UIDisplaceAnimation*)actionToPoint:(CGPoint)point
++(UIMoveAnimation*)actionToPoint:(CGPoint)point
                             Duration:(CGFloat)duration
 {
-    UIDisplaceAnimation * animation = [[UIDisplaceAnimation alloc] init];
+    UIMoveAnimation * animation = [[UIMoveAnimation alloc] init];
     animation.point             = point;
     [animation setAnimationType:AnimationDisplacement];
     [animation setDuration:duration];
     return animation;
 }
 
-+(UIDisplaceAnimation*)actionByPoint:(CGPoint)point
++(UIMoveAnimation*)actionByPoint:(CGPoint)point
                             Duration:(CGFloat)duration
 {
-    UIDisplaceAnimation * animation = [[UIDisplaceAnimation alloc] init];
+    UIMoveAnimation * animation = [[UIMoveAnimation alloc] init];
     [animation setAnimationType:AnimationDisplacementBy];
     [animation setDuration:duration];
     animation.point             = point;

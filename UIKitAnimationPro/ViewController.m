@@ -53,7 +53,7 @@
     UIScaleAnimation * scale = [UIScaleAnimation actionByScaleX:2.0
                                                          ScaleY:3.0
                                                        Duration:1];
-    UIDisplaceAnimation * displace = [UIDisplaceAnimation actionByPoint:CGPointMake(100, 100)
+    UIMoveAnimation * displace = [UIMoveAnimation actionByPoint:CGPointMake(100, 100)
                                                                Duration:3.0];
     UIFadeAnimation * fade = [UIFadeAnimation actionByAlpha:-0.2
                                                    Duration:1.0];
@@ -78,7 +78,7 @@
     {
         int x = arc4random()%5-2;
         int y = arc4random()%5-2;
-        UIDisplaceAnimation * displace0 = [UIDisplaceAnimation actionByPoint:CGPointMake(x, y)
+        UIMoveAnimation * displace0 = [UIMoveAnimation actionByPoint:CGPointMake(x, y)
                                                                    Duration:1.0];
 
         [seq addAction:displace0];
