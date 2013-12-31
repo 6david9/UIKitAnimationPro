@@ -7,9 +7,14 @@
 //
 
 #import "UIKitAnimation.h"
+
 #if !__has_feature(objc_arc)
 #error THIS CODE MUST BE COMPILED WITH ARC ENABLED!
 #endif
+
+
+#pragma mark - UIKitAnimation
+
 @implementation UIKitAnimation
 
 -(UIKitAnimation*)getAnimationUnit
@@ -21,6 +26,7 @@
 {
     _animationType  = type;
 }
+
 -(AnimationElement)getAnimationType
 {
     return _animationType;
@@ -35,12 +41,15 @@
 {
     return _animationDuration;
 }
+
 @end
+
+
+#pragma mark - UIFadeAnimation
 
 @implementation UIFadeAnimation
 
-+(UIFadeAnimation*)actionToAlpha:(CGFloat)alpha
-                        Duration:(CGFloat)duration
++(UIFadeAnimation*)actionToAlpha:(CGFloat)alpha Duration:(CGFloat)duration
 {
     UIFadeAnimation * fadeTo = [[UIFadeAnimation alloc] init];
     [fadeTo setAnimationType:AnimationFadeTo];
@@ -48,8 +57,8 @@
     fadeTo.alpha = alpha;
     return fadeTo;
 }
-+(UIFadeAnimation*)actionByAlpha:(CGFloat)alpha
-                        Duration:(CGFloat)duration
+
++(UIFadeAnimation*)actionByAlpha:(CGFloat)alpha Duration:(CGFloat)duration
 {
     UIFadeAnimation * fadeBy = [[UIFadeAnimation alloc] init];
     [fadeBy setAnimationType:AnimationFadeBy];
@@ -59,6 +68,10 @@
 }
 
 @end
+
+
+#pragma mark - UIMoveAnimation
+
 @implementation UIMoveAnimation
 
 +(UIMoveAnimation*)actionToPoint:(CGPoint)point
@@ -71,8 +84,7 @@
     return animation;
 }
 
-+(UIMoveAnimation*)actionByPoint:(CGPoint)point
-                            Duration:(CGFloat)duration
++(UIMoveAnimation*)actionByPoint:(CGPoint)point Duration:(CGFloat)duration
 {
     UIMoveAnimation * animation = [[UIMoveAnimation alloc] init];
     [animation setAnimationType:AnimationDisplacementBy];
@@ -83,11 +95,12 @@
 
 @end
 
+
+#pragma mark - UIScaleAnimation
+
 @implementation UIScaleAnimation
 
-+(UIScaleAnimation*)actionToScaleX:(CGFloat)scaleX
-                            ScaleY:(CGFloat)scaleY
-                          Duration:(CGFloat)duration
++(UIScaleAnimation*)actionToScaleX:(CGFloat)scaleX ScaleY:(CGFloat)scaleY Duration:(CGFloat)duration
 {
     UIScaleAnimation * animation = [[UIScaleAnimation alloc] init];
     [animation setAnimationType:AnimationScaleTo];
@@ -96,9 +109,8 @@
     animation.scaleY            = scaleY;
     return animation;
 }
-+(UIScaleAnimation*)actionByScaleX:(CGFloat)scaleX
-                            ScaleY:(CGFloat)scaleY
-                          Duration:(CGFloat)duration;
+
++(UIScaleAnimation*)actionByScaleX:(CGFloat)scaleX ScaleY:(CGFloat)scaleY Duration:(CGFloat)duration;
 {
     UIScaleAnimation * animation = [[UIScaleAnimation alloc] init];
     [animation setAnimationType:AnimationScaleBy];
@@ -110,10 +122,12 @@
 
 @end
 
+
+#pragma mark - UIRotateAnimation
+
 @implementation UIRotateAnimation
 
-+(UIRotateAnimation*)actionToRotate:(CGFloat)angle
-                          Duration:(CGFloat)duration
++(UIRotateAnimation*)actionToRotate:(CGFloat)angle Duration:(CGFloat)duration
 {
     UIRotateAnimation * animation =[[UIRotateAnimation alloc] init];
     [animation setAnimationType:AnimationRotateTo];
@@ -122,8 +136,8 @@
 
     return animation;
 }
-+(UIRotateAnimation*)actionByRotate:(CGFloat)angle
-                          Duration:(CGFloat)duration;
+
++(UIRotateAnimation*)actionByRotate:(CGFloat)angle Duration:(CGFloat)duration;
 {
     UIRotateAnimation * animation =[[UIRotateAnimation alloc] init];
     [animation setAnimationType:AnimationRotateBy];
@@ -134,6 +148,10 @@
 }
 
 @end
+
+
+#pragma mark - UICallbackBlock
+
 @implementation UICallbackBlock
 
 +(UICallbackBlock*)actionWithBlock:(KIT_ANIMATION_BLOCK)blocker
@@ -146,16 +164,22 @@
 
 @end
 
+
+#pragma mark - UIAnimationSequence
+
 @interface UIAnimationSequence()
 
 @property(nonatomic,strong) NSMutableArray * actionList;
 
 @end
+
+
 @implementation UIAnimationSequence
 
 -(id)init
 {
-    if(self=[super init])
+    self=[super init];
+    if(self)
     {
         self.actionList = [[NSMutableArray alloc] init];
     }
@@ -164,8 +188,9 @@
 
 -(void)removeFirstAction
 {
-    if([_actionList count])
+    if([_actionList count]) {
         [_actionList removeObjectAtIndex:0];
+    }
 }
 
 -(void)addAction:(id<UIAnimationUnitProtocol>)action
@@ -175,8 +200,10 @@
 
 -(UIKitAnimation*)getAnimationUnit
 {
-    if([_actionList count])
+    if([_actionList count]) {
         return [_actionList objectAtIndex:0];
+    }
     return nil;
 }
+
 @end

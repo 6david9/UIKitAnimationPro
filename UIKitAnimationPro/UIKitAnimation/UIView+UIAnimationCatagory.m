@@ -7,10 +7,13 @@
 //
 
 #import "UIView+UIAnimationCatagory.h"
+
 #if !__has_feature(objc_arc)
 #error THIS CODE MUST BE COMPILED WITH ARC ENABLED!
 #endif
+
 @implementation UIView (UIAnimationCatagory)
+
 -(void)runAction:(id<UIAnimationUnitProtocol>)action;
 {
     UIKitAnimation * animation = [action getAnimationUnit];
@@ -92,19 +95,19 @@
             break;
     }
     
-    [UIView animateWithDuration:[animation getDuration]
-                     animations:^(){
-                         self.center    = center;
-                         self.alpha     = alpha;
-                         self.transform = transform;
-                     } completion:^(BOOL finished)
+    [UIView animateWithDuration:[animation getDuration] animations:^(){
+        self.center    = center;
+        self.alpha     = alpha;
+        self.transform = transform;
+    }
+    completion:^(BOOL finished)
+    {
+        if ([action isKindOfClass:[UIAnimationSequence class]])
         {
-            if ([action isKindOfClass:[UIAnimationSequence class]])
-            {
-                UIAnimationSequence * animationList = (UIAnimationSequence*)action;
-                [animationList removeFirstAction];
-                [self runAction:animationList];//通过这里递归了
-            }
-        }];
+            UIAnimationSequence * animationList = (UIAnimationSequence*)action;
+            [animationList removeFirstAction];
+            [self runAction:animationList]; //通过这里递归了
+        }
+    }];
 }
 @end
